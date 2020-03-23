@@ -47,13 +47,6 @@ foreach ($allSeries as $series) {
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 
-$sheet->setCellValueByColumnAndRow(2, 2, 'Series Name');
-$sheet->setCellValueByColumnAndRow(3, 2, 'Total Seasons');
-$sheet->setCellValueByColumnAndRow(4, 2, 'No Of Episodes');
-$sheet->setCellValueByColumnAndRow(5, 2, 'Next Episode');
-$sheet->setCellValueByColumnAndRow(6, 2, 'Link');
-
-
 $reader = new PhpOffice\PhpSpreadsheet\Reader\Xlsx();
 $reader->setReadDataOnly(true);
 $existingSpreadsheet = $reader->load($_SERVER['HOME'] . '/Documents/personal_stuff/seriale.xlsx');
@@ -77,6 +70,14 @@ foreach ($seriale as $key => $serial) {
 if (array_diff($existingNE, $thisNE) === []) {
     exit;
 }
+
+$sheet->setCellValueByColumnAndRow(2, 2, 'Series Name');
+$sheet->setCellValueByColumnAndRow(3, 2, 'Total Seasons');
+$sheet->setCellValueByColumnAndRow(4, 2, 'No Of Episodes');
+$sheet->setCellValueByColumnAndRow(5, 2, 'Next Episode');
+$sheet->setCellValueByColumnAndRow(6, 2, 'Link');
+
+
 
 $sheet->setAutoFilter('B2:F' . count($seriale));
 $writer = new Xlsx($spreadsheet);
